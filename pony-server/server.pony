@@ -5,7 +5,7 @@ actor Sender is zmq.SocketNotifiableActor
     let push: zmq.Socket
     let printer: Printer
 
-    new create(env: Env,printer': Printer) =>
+    new create(env: Env,printer': Printer,server_key: Key val) =>
         printer = printer'
         push = zmq.Socket(zmq.PUSH, zmq.SocketNotifyActor(this))
 

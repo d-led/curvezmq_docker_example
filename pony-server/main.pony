@@ -6,5 +6,7 @@ actor Main
         let printer = Printer(env)
         printer.print("starting the server")
 
-        let sender = Sender(env, printer)
+        let server_key = KeyParser(env, printer, "server.key_secret").key()
+        printer.print("server public key: "+server_key.public)
+        let sender = Sender(env, printer, server_key)
         let receiver = Receiver(env, printer)
