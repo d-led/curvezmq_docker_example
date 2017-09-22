@@ -7,17 +7,8 @@ import sys
 import os
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        sys.argv[1:] = ["server"]
-
-    where = "certificates"
-
-    if not os.path.exists(where):
-        os.mkdir(where)
-
-
-    peers = ['server']
+    peers = ['pony-server']
 
     for name in peers:
-        public_file, secret_file = zmq.auth.create_certificates(where, sys.argv[1])
+        public_file, secret_file = zmq.auth.create_certificates(name, "tmp")
         print("Generated: "+str(public_file)+", "+str(secret_file))

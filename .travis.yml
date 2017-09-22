@@ -4,7 +4,7 @@ services:
   - docker
 
 install:
-  - pip install pyzmq
+  - sudo pip install pyzmq
 
 script:
   - ./run.sh

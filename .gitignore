@@ -15,4 +15,5 @@ static_config/server_home/config/cipher
 
 static_config/server_home/config/agentkeystore
 env.bat
-certificates/
+**.key
+**.key_secret
