@@ -5,9 +5,13 @@ actor Sender is zmq.SocketNotifiableActor
     let push: zmq.Socket
     let printer: Printer
 
-    new create(env: Env,printer': Printer,server_key: Key val) =>
+    new create(env: Env,printer': Printer, server_key: Key val) =>
         printer = printer'
         push = zmq.Socket(zmq.PUSH, zmq.SocketNotifyActor(this))
+
+        push.set(zmq.CurvePublicKey(server_key.public))
+        push.set(zmq.CurveSecretKey(server_key.secret))
+        push.set(zmq.CurveAsServer(true))
 
         match env.root | let root: AmbientAuth =>
             push(zmq.BindTCP(net.NetAuth(root), "0.0.0.0", "7777"))
@@ -26,9 +30,12 @@ actor Receiver is zmq.SocketNotifiableActor
     let pull: zmq.Socket
     let printer: Printer
 
-    new create(env: Env, printer': Printer) =>
+    new create(env: Env, printer': Printer, key: Key val, server_public_key: String) =>
         printer = printer'
         pull = zmq.Socket(zmq.PULL, zmq.SocketNotifyActor(this))
+        pull.set(zmq.CurvePublicKey(key.public))
+        pull.set(zmq.CurveSecretKey(key.secret))
+        pull.set(zmq.CurvePublicKeyOfServer(server_public_key))
 
         match env.root | let root: AmbientAuth =>
             pull(zmq.ConnectTCP(net.NetAuth(root), "127.0.0.1", "7777"))
