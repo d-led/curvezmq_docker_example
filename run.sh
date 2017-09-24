@@ -5,6 +5,7 @@ echo --=== generating the keys ===--
 
 echo --=== distributing the keys ===--
 cp pony-server/server.key python-worker/server.key
+cp pony-server/server.key go-worker/server.key
 
 echo --=== building and starting the containers ===--
 # docker-compose build

@@ -50,7 +50,8 @@ actor Receiver is zmq.SocketNotifiableActor
 
 
     be received(socket: zmq.Socket, peer: zmq.SocketPeer, message: zmq.Message) =>
-        printer.print("Pony Server received: " + message.string())
+        let first_frame = try message(0)? else "" end
+        printer.print("Pony Server received: " + first_frame)
 
     be dispose() =>
         pull.dispose()

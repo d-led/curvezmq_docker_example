@@ -7,3 +7,7 @@ services:
   python-worker:
     build:
       context: python-worker
+
+  go-worker:
+    build:
+      context: go-worker

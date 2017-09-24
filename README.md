@@ -34,4 +34,10 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 
 ### Python Worker
 
+- polling with a timeout
 - pulling on port `7777`, pushing on port `7778`
+
+### Go Worker
+
+- `7777`/`7778`
+- `os.Exit(0)` after some seconds
