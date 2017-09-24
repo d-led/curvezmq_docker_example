@@ -5,7 +5,6 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "D401AB61 
     apt-get update && \
     apt-get -y install pony-stable libsodium-dev
 
-# tmp.key* must be generated before building
 COPY bundle.json /src/main/
 RUN stable fetch
 

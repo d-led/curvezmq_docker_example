@@ -3,3 +3,7 @@ services:
   pony-server:
     build:
       context: pony-server
+
+  python-worker:
+    build:
+      context: python-worker

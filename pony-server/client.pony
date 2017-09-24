@@ -37,7 +37,8 @@ actor Worker is zmq.SocketNotifiableActor
 
     be received(socket: zmq.Socket, peer: zmq.SocketPeer, message: zmq.Message) =>
         printer.print("Pony Worker received: " + message.string())
-        push.send(recover zmq.Message.>push("Pony worker says: "+message.string()) end)
+        let first_frame = try message(0)? else "" end
+        push.send(recover zmq.Message.>push("Pony worker says: "+first_frame.string()) end)
 
     be dispose() =>
         pull.dispose()

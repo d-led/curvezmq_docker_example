@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-echo --=== generating the certificates ===--
+echo --=== generating the keys ===--
 ./generate_certificates.py
-cp pony-server/server.key server.key
+
+echo --=== distributing the keys ===--
+cp pony-server/server.key python-worker/server.key
 
 echo --=== building and starting the containers ===--
+# docker-compose build
 docker-compose up --build
