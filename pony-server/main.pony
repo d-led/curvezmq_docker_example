@@ -12,7 +12,7 @@ actor Main
         let receiver = Receiver(env, printer)
 
         // sleep for a while
-        let delay: I32 = 2
+        let delay: I32 = 10
         @sleep[I32](delay)
         sender.dispose()
         receiver.dispose()
