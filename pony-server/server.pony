@@ -14,12 +14,12 @@ actor Sender is zmq.SocketNotifiableActor
 
             printer.print("starting to push values")
             push.send(recover zmq.Message.>push("hi") end)
-            let delay: I32 = 2
-            @sleep[I32](delay)
-            push.dispose()
         else
             printer.print("ERROR: could not create Sender")
         end
+
+    be dispose() =>
+        push.dispose()
 
 
 actor Receiver is zmq.SocketNotifiableActor
@@ -40,6 +40,6 @@ actor Receiver is zmq.SocketNotifiableActor
 
     be received(socket: zmq.Socket, peer: zmq.SocketPeer, message: zmq.Message) =>
         printer.print("Received: " + message.string())
-        let delay: I32 = 2
-        @sleep[I32](delay)
+
+    be dispose() =>
         pull.dispose()

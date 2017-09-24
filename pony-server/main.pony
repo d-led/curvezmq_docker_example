@@ -10,3 +10,9 @@ actor Main
         printer.print("server public key: "+server_key.public)
         let sender = Sender(env, printer, server_key)
         let receiver = Receiver(env, printer)
+
+        // sleep for a while
+        let delay: I32 = 2
+        @sleep[I32](delay)
+        sender.dispose()
+        receiver.dispose()
