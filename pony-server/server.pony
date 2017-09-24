@@ -30,15 +30,15 @@ actor Receiver is zmq.SocketNotifiableActor
     let pull: zmq.Socket
     let printer: Printer
 
-    new create(env: Env, printer': Printer, key: Key val, server_public_key: String) =>
+    new create(env: Env, printer': Printer, server_key: Key val) =>
         printer = printer'
         pull = zmq.Socket(zmq.PULL, zmq.SocketNotifyActor(this))
-        pull.set(zmq.CurvePublicKey(key.public))
-        pull.set(zmq.CurveSecretKey(key.secret))
-        pull.set(zmq.CurvePublicKeyOfServer(server_public_key))
+        pull.set(zmq.CurvePublicKey(server_key.public))
+        pull.set(zmq.CurveSecretKey(server_key.secret))
+        pull.set(zmq.CurveAsServer(true))
 
         match env.root | let root: AmbientAuth =>
-            pull(zmq.ConnectTCP(net.NetAuth(root), "127.0.0.1", "7777"))
+            pull(zmq.BindTCP(net.NetAuth(root), "0.0.0.0", "7778"))
             printer.print("starting to wait for responses")
         else
             printer.print("ERROR: could not create Receiver")
@@ -46,7 +46,7 @@ actor Receiver is zmq.SocketNotifiableActor
 
 
     be received(socket: zmq.Socket, peer: zmq.SocketPeer, message: zmq.Message) =>
-        printer.print("Received: " + message.string())
+        printer.print("Pony Server received: " + message.string())
 
     be dispose() =>
         pull.dispose()
