@@ -14,6 +14,7 @@ Output: see [![Build Status](https://travis-ci.org/d-led/curvezmq_docker_example
 ### Deployment
 
 - for simplicity: as a Docker Compose config
+- keys generated via a simple python script: [generate_certificates.py](generate_certificates.py)
 - server public key distribution via simple copying into the containers
 
 ### Communication
