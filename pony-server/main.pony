@@ -23,7 +23,7 @@ actor Main
         timers(consume timer)
 
         // sleep for a while
-        let delay: I32 = 10
+        let delay: I32 = 30
         @sleep[I32](delay)
         sender.dispose()
         receiver.dispose()

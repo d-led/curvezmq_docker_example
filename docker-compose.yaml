@@ -11,3 +11,7 @@ services:
   go-worker:
     build:
       context: go-worker
+
+  groovy-worker:
+    build:
+      context: groovy-worker

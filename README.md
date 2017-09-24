@@ -8,8 +8,10 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 
 ## Libraries
 
-- [pyzmq](http://pyzmq.readthedocs.io/en/latest/) key generation
+- [pyzmq](http://pyzmq.readthedocs.io/en/latest/) key generation, worker
 - [pony-zmq](https://github.com/jemc/pony-zmq) server, worker
+- [go: zmq4](https://github.com/pebbe/zmq4) worker
+- [jeromq](https://github.com/zeromq/jeromq) worker
 
 ## Architecture
 
@@ -41,3 +43,9 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 
 - `7777`/`7778`
 - `os.Exit(0)` after some seconds
+
+### Groovy Worker
+
+- preparing dependencies for jzmq failed &rarr; using jeromq
+- `7777`/`7778`
+- responding to just 3 requests and then quitting (slow startup)
