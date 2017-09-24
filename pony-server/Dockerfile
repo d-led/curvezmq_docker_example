@@ -12,4 +12,4 @@ RUN stable fetch
 COPY . /src/main/
 WORKDIR /src/main
 RUN stable env ponyc
-CMD ./main
+CMD ./main --ponythreads=7
