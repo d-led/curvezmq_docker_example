@@ -22,6 +22,10 @@ actor Sender is zmq.SocketNotifiableActor
             printer.print("ERROR: could not create Sender")
         end
 
+    be ping(message: String) =>
+        push.send(recover zmq.Message.>push(message) end)
+
+
     be dispose() =>
         push.dispose()
 
