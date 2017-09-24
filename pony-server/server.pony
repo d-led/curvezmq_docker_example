@@ -10,7 +10,7 @@ actor Sender is zmq.SocketNotifiableActor
         push = zmq.Socket(zmq.PUSH, zmq.SocketNotifyActor(this))
 
         match env.root | let root: AmbientAuth =>
-            push(zmq.BindTCP(net.NetAuth(root), "localhost", "7777"))
+            push(zmq.BindTCP(net.NetAuth(root), "0.0.0.0", "7777"))
 
             printer.print("starting to push values")
             push.send(recover zmq.Message.>push("hi") end)
@@ -31,7 +31,7 @@ actor Receiver is zmq.SocketNotifiableActor
         pull = zmq.Socket(zmq.PULL, zmq.SocketNotifyActor(this))
 
         match env.root | let root: AmbientAuth =>
-            pull(zmq.ConnectTCP(net.NetAuth(root), "localhost", "7777"))
+            pull(zmq.ConnectTCP(net.NetAuth(root), "127.0.0.1", "7777"))
             printer.print("starting to wait for responses")
         else
             printer.print("ERROR: could not create Receiver")
