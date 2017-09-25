@@ -26,6 +26,7 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 - ZeroMQ communication via TCP + CurveZMQ ([Stonehouse pattern](http://hintjens.com/blog:49#toc5))
 - Requests sent on port 7777, and returned on 7778
 - The push socket does task distribution to the workers ([Divide and conquer pattern](http://zguide.zeromq.org/page:all#Divide-and-Conquer))
+- Timeouts are (currently) used to stop the demo after the server sends a finite amount of requests
 
 ### Pony Server
 
@@ -42,10 +43,8 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 ### Go Worker
 
 - `7777`/`7778`
-- `os.Exit(0)` after some seconds
 
 ### Groovy Worker
 
 - preparing dependencies for jzmq failed &rarr; using jeromq
 - `7777`/`7778`
-- responding to just 3 requests and then quitting (slow startup)

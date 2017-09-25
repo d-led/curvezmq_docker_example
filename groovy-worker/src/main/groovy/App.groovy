@@ -27,11 +27,20 @@ class App {
         pull.setCurveServerKey(server_key.public_)
         pull.connect("tcp://pony-server:7777")
 
-        3.times {
-            def bytes = pull.recv()
-            def message = new String(bytes, "ASCII")
-            println("Groovy worker received: "+message)
-            push.send("Groovy worker says: "+message)
+        def poller = ctx.createPoller(1)
+        poller.register(pull, ZMQ.Poller.POLLIN)
+
+        while (!Thread.currentThread().isInterrupted()) {
+            if (poller.poll(20000 /*ms*/)<1) {
+                break
+            }
+
+            if (poller.pollin(0)) {
+                def bytes = pull.recv(0)
+                def message = new String(bytes, "ASCII")
+                println("Groovy worker received: "+message)
+                push.send("Groovy worker says: "+message)
+            }
         }
     }
 

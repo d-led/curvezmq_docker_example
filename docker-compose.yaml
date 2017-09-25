@@ -4,13 +4,13 @@ services:
     build:
       context: pony-server
 
-  # python-worker:
-  #   build:
-  #     context: python-worker
+  python-worker:
+    build:
+      context: python-worker
 
-  # go-worker:
-  #   build:
-  #     context: go-worker
+  go-worker:
+    build:
+      context: go-worker
 
   groovy-worker:
     build:

@@ -4,19 +4,11 @@ import (
     "fmt"
     zmq "github.com/pebbe/zmq4"
     "io/ioutil"
-    "os"
     "regexp"
     "time"
 )
 
 func main() {
-    // exit after some seconds (for demo purposes)
-    go func() {
-        time.Sleep(20 * time.Second)
-        fmt.Println("Exiting the go worker")
-        os.Exit(0)
-    }()
-
     fmt.Println("Starting go worker")
 
     client_public, client_secret, err := readKeysFrom("client.key_secret")
@@ -28,18 +20,31 @@ func main() {
     push, _ := zmq.NewSocket(zmq.PUSH)
     push.ClientAuthCurve(server_public, client_public, client_secret)
     push.Connect("tcp://pony-server:7778")
+    defer push.Close()
 
     pull, _ := zmq.NewSocket(zmq.PULL)
     pull.ClientAuthCurve(server_public, client_public, client_secret)
     pull.Connect("tcp://pony-server:7777")
+    defer pull.Close()
+
+    poller := zmq.NewPoller()
+    poller.Add(pull, zmq.POLLIN)
 
     for {
-        message, err := pull.Recv(0)
+        sockets, _ := poller.Poll(20 * time.Second)
+        if len(sockets) == 0 {
+            break
+        }
+
+        message, err := sockets[0].Socket.Recv(0)
         panicIfError(err)
+
         fmt.Println("Go worker received:", message)
         _, err = push.Send("Go worker says: "+message, 0)
         panicIfError(err)
     }
+
+    fmt.Println("Exiting the go worker")
 }
 
 func panicIfError(err error) {
