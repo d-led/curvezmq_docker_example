@@ -4,7 +4,7 @@ Experimenting with [CurveZMQ](http://curvezmq.org) in different languages.
 
 The core question of the experiment is to see, whether different languages can interoperate securely via ZeroMQ.
 
-Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezmq_docker_example.svg?branch=master)](https://travis-ci.org/d-led/curvezmq_docker_example)
+Build & example output: see master branch in [![Build Status](https://travis-ci.org/d-led/curvezmq_docker_example.svg?branch=master)](https://travis-ci.org/d-led/curvezmq_docker_example/builds)
 
 ## Libraries
 
