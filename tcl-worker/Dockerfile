@@ -7,18 +7,20 @@ RUN apt-get update && apt-get install -y \
             tcl8.6-dev \
             tcllib \
             tcl-thread \
-            critcl \
             uuid-dev \
             git \
             libzmq3-dev \
             libsodium-dev \
             && apt-get clean
 
+RUN git clone http://github.com/andreas-kupries/critcl \
+      && cd critcl \
+      && tclsh ./build.tcl install
 
-RUN git clone https://github.com/d-led/tclzmq.git
+RUN git clone https://github.com/jdc8/tclzmq.git \
+      && cd tclzmq \
+      && tclsh build.tcl install
 
-RUN cd tclzmq && tclsh build.tcl debug
-
-COPY main.tcl .
+COPY . .
 
 CMD tclsh main.tcl

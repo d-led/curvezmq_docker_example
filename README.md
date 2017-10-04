@@ -12,6 +12,7 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 - [pony-zmq](https://github.com/jemc/pony-zmq) server, worker
 - [go: zmq4](https://github.com/pebbe/zmq4) worker
 - [jeromq](https://github.com/zeromq/jeromq) worker
+- [tclzmq](https://github.com/jdc8/tclzmq.git) worker
 
 ## Architecture
 
@@ -47,4 +48,8 @@ Build & example output: see [![Build Status](https://travis-ci.org/d-led/curvezm
 ### Groovy Worker
 
 - preparing dependencies for jzmq failed &rarr; using jeromq
+- `7777`/`7778`
+
+### Tcl Worker
+
 - `7777`/`7778`
