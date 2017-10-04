@@ -6,6 +6,8 @@ The core question of the experiment is to see, whether different languages can i
 
 Build & example output: see master branch in [![Build Status](https://travis-ci.org/d-led/curvezmq_docker_example.svg?branch=master)](https://travis-ci.org/d-led/curvezmq_docker_example/builds)
 
+![](output.png)
+
 ## Libraries
 
 - [pyzmq](http://pyzmq.readthedocs.io/en/latest/) key generation, worker
