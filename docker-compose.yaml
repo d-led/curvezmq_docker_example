@@ -15,3 +15,7 @@ services:
   groovy-worker:
     build:
       context: groovy-worker
+
+  tcl-worker:
+    build:
+      context: tcl-worker

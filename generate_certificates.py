@@ -13,6 +13,7 @@ if __name__ == '__main__':
         ['python-worker', 'client'],
         ['go-worker', 'client'],
         ['groovy-worker', 'client'],
+        ['tcl-worker', 'client'],
     ]
 
     for names in peers:
