@@ -18,3 +18,4 @@ env.bat
 **.key
 **.key_secret
 .gradle/
+pony-server/pony-server
