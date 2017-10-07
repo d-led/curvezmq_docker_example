@@ -8,3 +8,4 @@ install:
 
 script:
   - ./run.sh
+  - cd pony-benchmark && docker-compose up --build

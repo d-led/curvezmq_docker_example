@@ -19,3 +19,5 @@ env.bat
 **.key_secret
 .gradle/
 pony-server/pony-server
+.deps
+pony-benchmark/pony-benchmark
