@@ -9,7 +9,7 @@ actor Main
     new create(env: Env) =>
         let secure = try env.args(1)?.compare("secure") == Equal else false end
         env.out.print("Secure: "+secure.string())
-        let benchmark = PushPull.create(env, 100_000, secure)
+        PushPull.create(env, 100_000, secure)
 
 
 actor PushPull
