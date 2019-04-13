@@ -28,6 +28,8 @@ defmodule ElixirWorker.Listener do
   # implementation
 
   def start() do
+    IO.puts "Server key file: #{@server_key}"
+    IO.puts "Client key file: #{@client_key}"
     {:ok, [public_key: server_public]} = :chumak_cert.read(@server_key)
     {:ok, [public_key: client_public, secret_key: client_secret]} = :chumak_cert.read(@client_key)
 
