@@ -42,7 +42,7 @@ class NumberGenerator is TimerNotify
 
   fun ref _next(): String =>
     _counter = _counter + 1
-    _counter.string()
+    "Ping #" + _counter.string()
 
   fun ref apply(timer: Timer, count: U64): Bool =>
     _sender.ping(_next())

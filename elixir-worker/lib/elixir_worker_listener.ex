@@ -14,7 +14,7 @@ defmodule ElixirWorker.Listener do
   #
   def init(_) do
     # polling after a while to not block the startup
-    Process.send_after(self(), :start, 100)
+    Process.send_after(self(), :start, 2000)
     {:ok, nil}
   end
 
@@ -30,6 +30,7 @@ defmodule ElixirWorker.Listener do
   def start() do
     IO.puts "Server key file: #{@server_key}"
     IO.puts "Client key file: #{@client_key}"
+    IO.puts "Worker process: #{inspect(self())}"
     {:ok, [public_key: server_public]} = :chumak_cert.read(@server_key)
     {:ok, [public_key: client_public, secret_key: client_secret]} = :chumak_cert.read(@client_key)
 
@@ -38,16 +39,16 @@ defmodule ElixirWorker.Listener do
     :ok = :chumak.set_socket_option(pull, :curve_serverkey, server_public)
     :ok = :chumak.set_socket_option(pull, :curve_secretkey, client_secret)
     :ok = :chumak.set_socket_option(pull, :curve_publickey, client_public)
-    :chumak.connect(pull, :tcp, 'pony-server', 7777)
-    IO.puts("pull socket: #{inspect(pull)}")
+    {:ok, _peer_id} = :chumak.connect(pull, :tcp, 'pony-server', 7777)
+    IO.puts("Pull socket: #{inspect(pull)}")
 
     {:ok, push} = :chumak.socket(:push)
     :ok = :chumak.set_socket_option(push, :curve_server, false)
     :ok = :chumak.set_socket_option(push, :curve_serverkey, server_public)
     :ok = :chumak.set_socket_option(push, :curve_secretkey, client_secret)
     :ok = :chumak.set_socket_option(push, :curve_publickey, client_public)
-    :chumak.connect(push, :tcp, 'pony-server', 7778)
-    IO.puts("push socket: #{inspect(push)}")
+    {:ok, _peer_id} = :chumak.connect(push, :tcp, 'pony-server', 7778)
+    IO.puts("Push socket: #{inspect(push)}")
 
     IO.puts("connected")
 
