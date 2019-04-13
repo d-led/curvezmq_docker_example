@@ -11,7 +11,7 @@ defmodule ElixirWorker do
 
     opts = [strategy: :one_for_one, name: ElixirWorker.Supervisor]
 
-    spawn(fn -> :timer.sleep(10000); IO.puts("forcing an exit"); System.halt() end)
+    spawn(fn -> :timer.sleep(30000); IO.puts("forcing an exit"); System.halt() end)
 
     Supervisor.start_link(children, opts)
   end

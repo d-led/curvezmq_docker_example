@@ -19,3 +19,8 @@ services:
   tcl-worker:
     build:
       context: tcl-worker
+
+  elixir-worker:
+    build:
+      context: elixir-worker
+

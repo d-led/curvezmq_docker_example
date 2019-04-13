@@ -31,14 +31,13 @@ defmodule ElixirWorker.Listener do
     {:ok, [public_key: server_public]} = :chumak_cert.read(@server_key)
     {:ok, [public_key: client_public, secret_key: client_secret]} = :chumak_cert.read(@client_key)
 
-    client_secret |> IO.inspect
-
     {:ok, pull} = :chumak.socket(:pull)
     :ok = :chumak.set_socket_option(pull, :curve_server, false)
     :ok = :chumak.set_socket_option(pull, :curve_serverkey, server_public)
     :ok = :chumak.set_socket_option(pull, :curve_secretkey, client_secret)
     :ok = :chumak.set_socket_option(pull, :curve_publickey, client_public)
     :chumak.connect(pull, :tcp, 'pony-server', 7777)
+    IO.puts("pull socket: #{inspect(pull)}")
 
     {:ok, push} = :chumak.socket(:push)
     :ok = :chumak.set_socket_option(push, :curve_server, false)
@@ -46,6 +45,9 @@ defmodule ElixirWorker.Listener do
     :ok = :chumak.set_socket_option(push, :curve_secretkey, client_secret)
     :ok = :chumak.set_socket_option(push, :curve_publickey, client_public)
     :chumak.connect(push, :tcp, 'pony-server', 7778)
+    IO.puts("push socket: #{inspect(push)}")
+
+    IO.puts("connected")
 
     listen(10, pull, push)
   end
