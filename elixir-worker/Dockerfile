@@ -1,5 +1,5 @@
 # FROM elixir:1.6-alpine
-FROM elixir:1.6
+FROM elixir:1.8
 
 # RUN apk update && apk upgrade && \
 #     apk add --no-cache \
@@ -28,8 +28,7 @@ WORKDIR /home/elixir
 ENV CHUMAK_CURVE_LIB nacerl
 
 RUN mix deps.get \
-    && cd deps/chumak && ~/.mix/rebar3 compile \
-    && cd .. \
-    && mix compile
+    && cd deps/chumak && ~/.mix/rebar3 compile
+RUN mix compile
 
-CMD mix run
+CMD mix run --no-halt

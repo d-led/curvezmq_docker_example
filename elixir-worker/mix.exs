@@ -22,8 +22,8 @@ defmodule ElixirWorker.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:chumak, "~> 1.2"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:chumak, "~> 1.3"},
+      {:nacerl, git: "https://github.com/willemdj/NaCerl"},
     ]
   end
 end
