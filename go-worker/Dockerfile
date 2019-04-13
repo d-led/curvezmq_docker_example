@@ -1,4 +1,4 @@
-FROM golang:1.8
+FROM golang
 
 RUN apt-get update && apt-get install -y libzmq3-dev libsodium-dev
 
