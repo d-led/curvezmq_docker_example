@@ -8,10 +8,10 @@ import os
 
 if __name__ == '__main__':
     peers = [
-        # ['pony-server', 'server'],
-        # ['pony-server', 'client'],
+        ['pony-server', 'server'],
+        ['pony-server', 'client'],
         ['python-worker', 'client'],
-        ['go-server', 'server'],
+        # ['go-server', 'server'],
         ['go-server', 'client'],
         ['groovy-worker', 'client'],
         ['tcl-worker', 'client'],
