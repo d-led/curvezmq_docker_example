@@ -22,7 +22,7 @@ class KeyParser
 
         try
             let relative_path = Path.join(".", filename)
-            with file = OpenFile(FilePath(env.root as AmbientAuth, relative_path)?) as File do
+            with file = OpenFile(FilePath(env.root, relative_path)) as File do
 
                 var text: String val =
                       file.read_string(file.size())

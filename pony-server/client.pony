@@ -21,18 +21,9 @@ actor Worker is zmq.SocketNotifiableActor
         push.set(zmq.CurvePublicKeyOfServer(server_public_key))
 
 
-        match env.root | let root: AmbientAuth =>
-            pull(zmq.ConnectTCP(net.NetAuth(root), "127.0.0.1", "7777"))
-        else
-            printer.print("ERROR: could not create worker Receiver")
-        end
+        pull(zmq.ConnectTCP(net.NetAuth(env.root), "127.0.0.1", "7777"))
 
-        match env.root | let root: AmbientAuth =>
-            push(zmq.ConnectTCP(net.NetAuth(root), "127.0.0.1", "7778"))
-        else
-            printer.print("ERROR: could not create worker Sender")
-        end
-
+        push(zmq.ConnectTCP(net.NetAuth(env.root), "127.0.0.1", "7778"))
 
 
     be received(socket: zmq.Socket, peer: zmq.SocketPeer, message: zmq.Message) =>

@@ -13,14 +13,10 @@ actor Sender is zmq.SocketNotifiableActor
         push.set(zmq.CurveSecretKey(server_key.secret))
         push.set(zmq.CurveAsServer(true))
 
-        match env.root | let root: AmbientAuth =>
-            push(zmq.BindTCP(net.NetAuth(root), "0.0.0.0", "7777"))
+        push(zmq.BindTCP(net.NetAuth(env.root), "0.0.0.0", "7777"))
 
-            printer.print("starting to push values")
-            push.send(recover zmq.Message.>push("hi") end)
-        else
-            printer.print("ERROR: could not create Sender")
-        end
+        printer.print("starting to push values")
+        push.send(recover zmq.Message.>push("hi") end)
 
     be ping(message: String) =>
         push.send(recover zmq.Message.>push(message) end)
@@ -41,12 +37,8 @@ actor Receiver is zmq.SocketNotifiableActor
         pull.set(zmq.CurveSecretKey(server_key.secret))
         pull.set(zmq.CurveAsServer(true))
 
-        match env.root | let root: AmbientAuth =>
-            pull(zmq.BindTCP(net.NetAuth(root), "0.0.0.0", "7778"))
-            printer.print("starting to wait for responses")
-        else
-            printer.print("ERROR: could not create Receiver")
-        end
+        pull(zmq.BindTCP(net.NetAuth(env.root), "0.0.0.0", "7778"))
+        printer.print("starting to wait for responses")
 
 
     be received(socket: zmq.Socket, peer: zmq.SocketPeer, message: zmq.Message) =>
