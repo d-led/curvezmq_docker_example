@@ -1,33 +1,21 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
-    }
+plugins {
+  id 'com.github.johnrengelman.shadow' version '7.1.2'
+  id 'java'
+  id 'groovy'
+  id 'application'
 }
-
-apply plugin: 'com.github.johnrengelman.shadow'
-
-// Apply the groovy plugin to add support for Groovy
-apply plugin: 'groovy'
-
-// Apply the application plugin to add support for building an application
-apply plugin: 'application'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     // Use the latest Groovy version for building this library
-    compile 'org.codehaus.groovy:groovy-all:2.4.11'
-    compile 'org.zeromq:jeromq:0.4.2'
+    implementation 'org.codehaus.groovy:groovy-all:3.0.9'
+    implementation 'org.zeromq:jeromq:0.5.2'
     // Use the awesome Spock testing and specification framework
-    testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.1-M2-groovy-3.0'
 }
 
 // Define the main class for the application
@@ -36,5 +24,5 @@ mainClassName = 'App'
 // gradle shadowJar
 // java -jar build/libs/groovy-client-all.jar
 shadowJar {
-   baseName = 'groovy-client'
+   archiveBaseName = 'groovy-client'
 }

@@ -1,0 +1,5 @@
+%{
+  "chumak": {:git, "https://github.com/d-led/chumak", "464cfcf4324b960273296e5ad38630d88c74abb2", []},
+  "enacl": {:git, "https://github.com/jlouis/enacl", "46e2754a50f4d9192ebf008bf80ea8242e7f7986", []},
+  "nacerl": {:git, "https://github.com/willemdj/NaCerl", "71995aa22424f967c415a1d067197600ab8d8d93", []},
+}

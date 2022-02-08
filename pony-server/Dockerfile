@@ -1,14 +1,12 @@
 FROM ponylang/ponyc:release
 
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys "D401AB61 DBE1D0A2" && \
-    echo "deb https://dl.bintray.com/pony-language/pony-stable-debian /" | tee -a /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y install pony-stable libsodium-dev
+RUN apt-get update && \
+    apt-get -y install build-essential libpcre2-dev libsodium-dev
 
-COPY bundle.json /src/main/
-RUN stable fetch
+COPY corral.json lock.json /src/main/
+RUN corral fetch
 
 COPY . /src/main/
 WORKDIR /src/main
-RUN stable env ponyc
+RUN corral run -- ponyc
 CMD ./main --ponythreads=7

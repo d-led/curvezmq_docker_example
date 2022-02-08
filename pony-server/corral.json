@@ -1,0 +1,28 @@
+{
+    "packages": [],
+    "deps": [{
+            "locator": "github.com/d-led/pony-zmq.git",
+            "version": "master"
+        },
+        {
+            "locator": "github.com/d-led/pony-sodium.git",
+            "version": "master"
+        },
+        {
+            "locator": "github.com/jemc/pony-inspect.git",
+            "version": "master"
+        },
+        {
+            "locator": "github.com/ponylang/regex.git",
+            "version": ""
+        }
+    ],
+    "info": {
+        "description": "",
+        "homepage": "",
+        "license": "",
+        "documentation_url": "",
+        "version": "",
+        "name": ""
+    }
+}

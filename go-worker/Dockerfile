@@ -1,13 +1,15 @@
-FROM golang
+FROM golang:1.17
 
 RUN apt-get update && apt-get install -y libzmq3-dev libsodium-dev
 
-ENV GOMAXPROCS 4
+WORKDIR /usr/src/main
 
-RUN go get github.com/pebbe/zmq4
+COPY go.mod ./
+COPY go.sum ./
+RUN go mod download
 
-COPY . .
+COPY *.go .
 
-RUN go build main.go
+RUN go build
 
 CMD ./main

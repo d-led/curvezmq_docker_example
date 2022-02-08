@@ -11,9 +11,11 @@ if __name__ == '__main__':
         ['pony-server', 'server'],
         ['pony-server', 'client'],
         ['python-worker', 'client'],
+        # ['go-server', 'server'],
         ['go-worker', 'client'],
         ['groovy-worker', 'client'],
         ['tcl-worker', 'client'],
+        ['elixir-worker/priv', 'client'],
     ]
 
     for names in peers:
