@@ -1,5 +1,5 @@
 %{
-  "chumak": {:hex, :chumak, "1.4.0", "79eb44ba2da1e2a072c06bca1c79016c936423c6b8f826d6a7c2e22e046a3d40", [:rebar3], [], "hexpm", "a3a618a2cae0e3f8e844752e7f6f56c6231c5daef1a8de498a5973baa202cc5c"},
-  "enacl": {:hex, :enacl, "1.2.1", "7776480b9b3d42a51d66dbbcbf17fa3d79285b3d2adcb4d5b5bd0b70f0ef1949", [:rebar3], [], "hexpm", "67bbbeddd2564dc899a3dcbc3765cd6ad71629134f1e500a50ec071f0f75e552"},
+  "chumak": {:git, "https://github.com/d-led/chumak", "464cfcf4324b960273296e5ad38630d88c74abb2", []},
+  "enacl": {:git, "https://github.com/jlouis/enacl", "46e2754a50f4d9192ebf008bf80ea8242e7f7986", []},
   "nacerl": {:git, "https://github.com/willemdj/NaCerl", "71995aa22424f967c415a1d067197600ab8d8d93", []},
 }

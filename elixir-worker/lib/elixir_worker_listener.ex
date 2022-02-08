@@ -13,8 +13,8 @@ defmodule ElixirWorker.Listener do
 
   #
   def init(_) do
-    # polling after a while to not block the startup
-    Process.send_after(self(), :start, 2000)
+    # connect after a while to not block the startup
+    Process.send_after(self(), :start, 3000)
     {:ok, nil}
   end
 
@@ -42,7 +42,8 @@ defmodule ElixirWorker.Listener do
 
     pony_server = String.to_charlist(System.get_env("PONY_SERVER", "pony-server"))
 
-    {:ok, _peer_id} = :chumak.connect(pull, :tcp, pony_server, 7777)
+    # 2nd argument: not a tuple
+    # {:ok, _peer_id} = :chumak.connect(pull, :tcp, pony_server, 7777)
 
     IO.puts("Pull socket: #{inspect(pull)}")
 
@@ -59,14 +60,20 @@ defmodule ElixirWorker.Listener do
     listen(10, pull, push)
   end
 
-  defp listen(count, pull, push) do
-    case :chumak.recv(pull) do
-      {:ok, body} ->
-        Logger.info(body)
-        listen(count - 1, pull, push)
+  defp listen(0, _pull, _push), do: IO.puts("exiting ...")
 
-      err ->
-        IO.puts("Shutting down Elixir worker: #{err}")
-    end
+  defp listen(count, pull, push) do
+    :chumak.send(push, "Elixir worker says: Ping countdown ##{count}")
+    Process.sleep(1000)
+    listen(count - 1, pull, push)
+
+    # case :chumak.recv(pull) do
+    #   {:ok, body} ->
+    #     Logger.info(body)
+    #     listen(count - 1, pull, push)
+
+    #   err ->
+    #     IO.puts("Shutting down Elixir worker: #{err}")
+    # end
   end
 end

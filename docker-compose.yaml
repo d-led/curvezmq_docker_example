@@ -7,20 +7,29 @@ services:
   python-worker:
     build:
       context: python-worker
+    links:
+      - pony-server
 
   go-worker:
     build:
       context: go-worker
+    links:
+      - pony-server
 
   groovy-worker:
     build:
       context: groovy-worker
+    links:
+      - pony-server
 
   tcl-worker:
     build:
       context: tcl-worker
+    links:
+      - pony-server
 
   elixir-worker:
     build:
       context: elixir-worker
-
+    links:
+      - pony-server
