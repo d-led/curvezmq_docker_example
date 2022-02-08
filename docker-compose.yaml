@@ -28,8 +28,8 @@ services:
     links:
       - pony-server
 
-  # elixir-worker:
-  #   build:
-  #     context: elixir-worker
-  #   links:
-  #     - pony-server
+  elixir-worker:
+    build:
+      context: elixir-worker
+    links:
+      - pony-server

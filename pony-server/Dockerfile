@@ -11,4 +11,4 @@ RUN corral fetch
 COPY . /src/main/
 WORKDIR /src/main
 RUN corral run -- ponyc
-CMD ./main --ponythreads=16
+CMD ./main
