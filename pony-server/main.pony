@@ -3,6 +3,8 @@
 
 use "time"
 
+use @sleep[I32](delay: I32)
+
 actor Main
     new create(env: Env) =>
         let printer = Printer(env)
@@ -24,7 +26,7 @@ actor Main
 
         // sleep for a while
         let delay: I32 = 22
-        @sleep[I32](delay)
+        @sleep(delay)
         sender.dispose()
         receiver.dispose()
         worker.dispose()
