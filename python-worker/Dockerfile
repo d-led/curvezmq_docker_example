@@ -1,4 +1,4 @@
-FROM python:jessie
+FROM python:buster
 
 RUN pip install pyzmq
 
