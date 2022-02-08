@@ -28,9 +28,9 @@ defmodule ElixirWorker.Listener do
   # implementation
 
   def start() do
-    IO.puts "Server key file: #{@server_key}"
-    IO.puts "Client key file: #{@client_key}"
-    IO.puts "Worker process: #{inspect(self())}"
+    IO.puts("Server key file: #{@server_key}")
+    IO.puts("Client key file: #{@client_key}")
+    IO.puts("Worker process: #{inspect(self())}")
     {:ok, [public_key: server_public]} = :chumak_cert.read(@server_key)
     {:ok, [public_key: client_public, secret_key: client_secret]} = :chumak_cert.read(@client_key)
 
@@ -39,7 +39,11 @@ defmodule ElixirWorker.Listener do
     :ok = :chumak.set_socket_option(pull, :curve_serverkey, server_public)
     :ok = :chumak.set_socket_option(pull, :curve_secretkey, client_secret)
     :ok = :chumak.set_socket_option(pull, :curve_publickey, client_public)
-    {:ok, _peer_id} = :chumak.connect(pull, :tcp, 'pony-server', 7777)
+
+    pony_server = String.to_charlist(System.get_env("PONY_SERVER", "pony-server"))
+
+    {:ok, _peer_id} = :chumak.connect(pull, :tcp, pony_server, 7777)
+
     IO.puts("Pull socket: #{inspect(pull)}")
 
     {:ok, push} = :chumak.socket(:push)
@@ -47,7 +51,7 @@ defmodule ElixirWorker.Listener do
     :ok = :chumak.set_socket_option(push, :curve_serverkey, server_public)
     :ok = :chumak.set_socket_option(push, :curve_secretkey, client_secret)
     :ok = :chumak.set_socket_option(push, :curve_publickey, client_public)
-    {:ok, _peer_id} = :chumak.connect(push, :tcp, 'pony-server', 7778)
+    {:ok, _peer_id} = :chumak.connect(push, :tcp, pony_server, 7778)
     IO.puts("Push socket: #{inspect(push)}")
 
     IO.puts("connected")
@@ -58,10 +62,11 @@ defmodule ElixirWorker.Listener do
   defp listen(count, pull, push) do
     case :chumak.recv(pull) do
       {:ok, body} ->
-        Logger.info body
-        listen(count-1, pull, push)
+        Logger.info(body)
+        listen(count - 1, pull, push)
+
       err ->
-        IO.puts "Shutting down Elixir worker: #{err}"
+        IO.puts("Shutting down Elixir worker: #{err}")
     end
   end
 end

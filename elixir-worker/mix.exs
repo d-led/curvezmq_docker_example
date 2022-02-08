@@ -5,7 +5,7 @@ defmodule ElixirWorker.MixProject do
     [
       app: :elixir_worker,
       version: "0.1.0",
-      elixir: "~> 1.6",
+      elixir: "~> 1.13",
       start_permanent: true,
       deps: deps()
     ]
@@ -15,15 +15,16 @@ defmodule ElixirWorker.MixProject do
   def application do
     [
       mod: {ElixirWorker, 10},
-      extra_applications: [:logger, :chumak],
+      extra_applications: [:logger, :chumak]
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:chumak, "~> 1.3"},
-      {:nacerl, git: "https://github.com/willemdj/NaCerl"},
+      {:chumak, "~> 1.4"},
+      # {:nacerl, git: "https://github.com/willemdj/NaCerl"},
+      {:enacl, "~> 1.2"}
     ]
   end
 end

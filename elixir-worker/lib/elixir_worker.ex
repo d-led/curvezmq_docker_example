@@ -3,7 +3,7 @@ defmodule ElixirWorker do
   use Application
 
   def start(_, _) do
-    IO.puts "Starting Elixir/Erlang worker"
+    IO.puts("Starting Elixir/Erlang worker")
 
     children = [
       ElixirWorker.Listener
@@ -11,7 +11,11 @@ defmodule ElixirWorker do
 
     opts = [strategy: :one_for_one, name: ElixirWorker.Supervisor]
 
-    spawn(fn -> :timer.sleep(30000); IO.puts("forcing an exit"); System.halt() end)
+    spawn(fn ->
+      :timer.sleep(30000)
+      IO.puts("forcing an exit")
+      System.halt()
+    end)
 
     Supervisor.start_link(children, opts)
   end
