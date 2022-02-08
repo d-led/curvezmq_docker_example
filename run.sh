@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+echo --=== installing pyzmq ===--
+pip install pyzmq
+
 echo --=== generating the keys ===--
 ./generate_certificates.py
 

@@ -27,6 +27,4 @@ jobs:
       continue-on-error: true
 
     - name: Build the Docker image
-      run:
-        - pip install pyzmq
-        - ./run.sh
+      run: ./run.sh
