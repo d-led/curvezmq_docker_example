@@ -1,7 +1,11 @@
 {
   "locks": [
     {
-      "locator": "github.com/jemc/pony-zmq.git",
+      "locator": "github.com/ponylang/regex.git",
+      "revision": "main"
+    },
+    {
+      "locator": "github.com/d-led/pony-zmq.git",
       "revision": "master"
     },
     {
@@ -11,10 +15,6 @@
     {
       "locator": "github.com/jemc/pony-inspect.git",
       "revision": "master"
-    },
-    {
-      "locator": "github.com/ponylang/regex.git",
-      "revision": "main"
     }
   ]
 }
